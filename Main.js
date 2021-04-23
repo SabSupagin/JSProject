@@ -3,7 +3,18 @@ const app = Vue.createApp({
         return{
             NameShop: 'Moblie',
             Total:0,
-            cart: [],
+            cart: [ 
+                {
+                    id:1,
+                    name: 'Sumsung',
+                    price:10,
+                    image: './images/2.png',
+                    active: false,
+                    qty:1,
+                    color: ["Black","Gold","Blue"],
+                    total:100
+                }
+            ],
             users:[
                 {
                     user: "Supagin",
@@ -14,12 +25,11 @@ const app = Vue.createApp({
                     password: 1234
                 }       
             ],
-            amount: 0,
             Tests:[
                 {
                     id:1,
                     name: 'Sumsung',
-                    price:10,
+                    price:100,
                     image: './images/2.png',
                     active: false,
                     qty:10,
@@ -68,23 +78,35 @@ const app = Vue.createApp({
 
     methods: {
         gopay(){
-            location.href='pay.php'
+            location.href='customer/pay.php'
         },
         GoCart(){
-            location.href='cart.php'
+            location.href='customer/cart.php'
         },
         goback(){
-            location.href='index.html'
+            location.href='../index.html'
         },
         logout(){
             if(confirm("คุณต้องการออกจากระบบใช่หรือไม่ !!"))
+            location.href='login/login.php'
+        },
+        logoutup(){
             location.href='login.php'
+        },
+        submitpay(){
+            if(confirm("คุณต้องการชำระเงินใช่หรือไม่ !!"))
+            location.href='index.html'
         },
         login(uname,psw){
             for(let i = 0;i <= this.users.length;i++){
+                if(psw == 12345 && uname == 'Admin'){
+                    if(confirm('คุณต้องการใช้งานส่วนแอดมินใช่หรือไม่ !!')){
+                        location.href='../admin/admin.php'
+                    }
+                }
                 if(psw == this.users[i].password && uname == this.users[i].user){
                     alert("รหัสผ่านถูกต้อง !!")
-                    location.href='index.html'
+                    location.href='../index.html'
                 }
             }
         },
@@ -92,7 +114,7 @@ const app = Vue.createApp({
             location.href='signup.php'
         },
         signupinfo(email,psw,pswrepeat){
-            location.href='login.php'
+            location.href='login/login.php'
             this.users.push({
                 user:email,
                 password:psw
