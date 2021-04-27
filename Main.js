@@ -1,3 +1,5 @@
+import Vue from "vue";
+import "./plugins/bootstrap-vue";
 const app = Vue.createApp({
     data(){
         return{
